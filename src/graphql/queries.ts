@@ -1,25 +1,40 @@
 import { gql } from "@apollo/client";
 
 export const GET_USER_REPOS = gql`
-  query getUserRepos($username: String!, $first: Int!) {
+  query GetUserRepositories(
+    $username: String!
+    $first: Int
+    $after: String
+    $before: String
+    $orderBy: RepositoryOrder
+  ) {
     user(login: $username) {
       name
       login
       repositories(
         first: $first
-        orderBy: { field: UPDATED_AT, direction: DESC }
+        after: $after
+        before: $before
+        orderBy: $orderBy
       ) {
+        totalCount
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          endCursor
+          startCursor
+        }
         nodes {
           id
           name
           description
+          url
           stargazerCount
           forkCount
           updatedAt
           primaryLanguage {
             name
           }
-          url
         }
       }
     }
