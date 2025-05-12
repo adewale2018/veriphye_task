@@ -59,7 +59,9 @@ const ReposList = () => {
               loading={loading}
               handlePrevious={handlePrevious}
               handleNext={handleNext}
-              pageInfo={pageInfo || { hasPreviousPage: false, hasNextPage: false }}
+              pageInfo={
+                pageInfo || { hasPreviousPage: false, hasNextPage: false }
+              }
             />
           )}
         </>

@@ -21,7 +21,6 @@ const SearchForm = ({ onSubmit }: OnSubmitProps) => {
       setShowError(false);
     }
     onSubmit(inputName.trim());
-    setInputName("");
   };
 
   useEffect(() => {
