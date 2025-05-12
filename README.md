@@ -1,4 +1,5 @@
 # GitHub Repositories Explorer
+<img width="1507" alt="Screenshot 2025-05-12 at 2 37 02 PM" src="https://github.com/user-attachments/assets/661024bb-dfa1-4a13-be0b-d5e9647b6c2b" />
 
 A simple GitHub repositories app built with React, TypeScript, Apollo Client, and the GitHub GraphQL API.
 
@@ -49,3 +50,4 @@ create a new file in the root directory and name it `.env`.
 Follow the content of `.env.example` and paste your tokens as specified, then
 
 npm run dev
+```
