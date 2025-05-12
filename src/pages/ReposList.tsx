@@ -62,6 +62,7 @@ const ReposList = () => {
               pageInfo={
                 pageInfo || { hasPreviousPage: false, hasNextPage: false }
               }
+              languageFilter={languageFilter}
             />
           )}
         </>
