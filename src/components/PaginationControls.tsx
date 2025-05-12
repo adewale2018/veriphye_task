@@ -9,6 +9,7 @@ type PaginationControlsProps = {
     hasPreviousPage: boolean;
     hasNextPage: boolean;
   };
+  languageFilter: string;
 };
 
 export default function PaginationControls({
@@ -16,12 +17,13 @@ export default function PaginationControls({
   pageInfo,
   loading,
   handleNext,
+  languageFilter
 }: PaginationControlsProps) {
   return (
     <div className="flex md:justify-end justify-between gap-4 pt-4">
       <Button
         onClick={handlePrevious}
-        disabled={!pageInfo.hasPreviousPage}
+        disabled={!!languageFilter || !pageInfo.hasPreviousPage}
         variant="outline"
         className="border border-blue-600 text-blue-800"
       >
@@ -30,7 +32,7 @@ export default function PaginationControls({
       <Button
         className="px-8 bg-pri hover:bg-blue-700"
         onClick={handleNext}
-        disabled={!pageInfo.hasNextPage}
+        disabled={!!languageFilter || !pageInfo.hasNextPage}
       >
         {loading && <Loader2 className="mr-1 h-4 w-4" />} Next
       </Button>

@@ -14,9 +14,19 @@ export const useRepositories = () => {
   const [sortBy, setSortBy] = useState("updated");
 
   const variables =
-  direction === "forward"
-    ? { username, first, after, orderBy: { field: "UPDATED_AT", direction: "DESC" } }
-    : { username, last: first, before, orderBy: { field: "UPDATED_AT", direction: "DESC" } };
+    direction === "forward"
+      ? {
+          username,
+          first,
+          after,
+          orderBy: { field: "UPDATED_AT", direction: "DESC" },
+        }
+      : {
+          username,
+          last: first,
+          before,
+          orderBy: { field: "UPDATED_AT", direction: "DESC" },
+        };
 
   const { loading, error, data } = useQuery(GET_USER_REPOS, {
     variables,
@@ -32,7 +42,7 @@ export const useRepositories = () => {
       setDirection("forward");
     }
   };
-  
+
   const handlePrevious = () => {
     if (pageInfo?.hasPreviousPage) {
       setBefore(pageInfo.startCursor);
@@ -60,7 +70,7 @@ export const useRepositories = () => {
     setAfter(null);
     setBefore(null);
     setDirection("forward");
-  }, [username]);
+  }, [username, languageFilter, sortBy]);
 
   return {
     username,
