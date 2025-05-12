@@ -28,7 +28,7 @@ export default function PaginationControls({
         Previous
       </Button>
       <Button
-        className="px-8 bg-blue-600 hover:bg-blue-800"
+        className="px-8 bg-pri hover:bg-blue-700"
         onClick={handleNext}
         disabled={!pageInfo.hasNextPage}
       >

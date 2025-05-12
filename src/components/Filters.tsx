@@ -10,7 +10,7 @@ export default function Filters({
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center my-6 gap-4">
       <div className="flex items-center gap-4">
-        <label htmlFor="language-filter" className="font-medium text-blue-800">
+        <label htmlFor="language-filter" className="font-medium text-pri">
           Filter by language:
         </label>
         <select
@@ -29,7 +29,7 @@ export default function Filters({
       </div>
 
       <div className="flex items-center gap-4">
-        <label htmlFor="sort-by" className="font-medium text-blue-800">
+        <label htmlFor="sort-by" className="font-medium text-pri">
           Sort by:
         </label>
         <select

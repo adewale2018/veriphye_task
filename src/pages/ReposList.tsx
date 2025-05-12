@@ -7,7 +7,6 @@ import type { Repository } from "../types";
 import RepositoryCard from "../components/RepositoryCard";
 import SearchForm from "../components/SearchForm";
 import { useRepositories } from "../hooks/useRepositories";
-
 const ReposList = () => {
   const {
     loading,

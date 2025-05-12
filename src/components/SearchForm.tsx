@@ -42,7 +42,7 @@ const SearchForm = ({ onSubmit }: OnSubmitProps) => {
           className="flex-1"
         />
         <Button
-          className="cursor-pointer px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="cursor-pointer px-6 py-2 bg-pri hover:bg-blue-600 text-white rounded-lg  focus:outline-none focus:ring-2"
           type="submit"
         >
           <Search className="mr-1" />{" "}

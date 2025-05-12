@@ -6,18 +6,18 @@ import { getLanguageColor } from "../utils/getLanguageColor";
 
 export default function RepositoryCard(repository: Repository) {
   return (
-    <div className="group border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:border-blue-100 bg-white">
+    <div className="group border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-all duration-300 hover:border-blue-100 bg-blue-100">
       {/* Header with repo name */}
       <div className="flex items-start justify-between">
         <a
           href={repository?.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xl font-bold text-blue-500 hover:text-blue-600 transition-colors line-clamp-1"
+          className="text-xl font-bold text-pri hover:text-blue-600 transition-colors line-clamp-1"
         >
           {repository?.name}
         </a>
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2">
+        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 ml-2 border border-blue-500">
           Public
         </span>
       </div>
