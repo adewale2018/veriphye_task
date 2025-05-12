@@ -1,12 +1,27 @@
-export interface RepositoryProps {
+export interface Repository {
   id: string;
   name: string;
+  stargazerCount: number;
+  updatedAt: Date;
   url: string;
   description: string;
-  stargazerCount: number;
   forkCount: number;
-  primaryLanguage: {
+  primaryLanguage?: {
     name: string;
-  }
-  updatedAt: Date;
+  } | null;
+}
+
+export interface PageInfo {
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
+  startCursor: string | null;
+  endCursor: string | null;
+}
+
+export interface FiltersProps {
+  languageFilter: string;
+  setLanguageFilter: (value: string) => void;
+  sortBy: string;
+  setSortBy: (value: string) => void;
+  availableLanguages: string[];
 }

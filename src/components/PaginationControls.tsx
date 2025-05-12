@@ -23,10 +23,15 @@ export default function PaginationControls({
         onClick={handlePrevious}
         disabled={!pageInfo.hasPreviousPage}
         variant="outline"
+        className="border border-blue-600 text-blue-800"
       >
         Previous
       </Button>
-      <Button className="px-8" onClick={handleNext} disabled={!pageInfo.hasNextPage}>
+      <Button
+        className="px-8 bg-blue-600 hover:bg-blue-800"
+        onClick={handleNext}
+        disabled={!pageInfo.hasNextPage}
+      >
         {loading && <Loader2 className="mr-1 h-4 w-4" />} Next
       </Button>
     </div>

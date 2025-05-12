@@ -1,12 +1,16 @@
+import type { PageInfo, Repository } from "../types";
+
 import { GET_USER_REPOS } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 
 export const useRepositories = () => {
-  const [first] = useState(10);
-  const [after, setAfter] = useState<string | null>(null);
-  const [before, setBefore] = useState<string | null>(null);
+  const [first] = useState(15);
   const [username, setUsername] = useState("");
+  const [before, setBefore] = useState<string | null>(null);
+  const [after, setAfter] = useState<string | null>(null);
+  const [languageFilter, setLanguageFilter] = useState("");
+  const [sortBy, setSortBy] = useState("updated");
 
   const { loading, error, data } = useQuery(GET_USER_REPOS, {
     variables: { username, first, after, before, last: null },
@@ -29,17 +33,42 @@ export const useRepositories = () => {
     }
   };
 
-  const repos = data?.user?.repositories?.nodes || [];
+  const repositories = data?.user?.repositories?.nodes || [];
+
+  const filteredRepos = languageFilter
+    ? repositories.filter(
+        (repo: Repository) =>
+          repo.primaryLanguage?.name?.toLowerCase() ===
+          languageFilter.toLowerCase()
+      )
+    : repositories;
+
+  const sortedRepos = [...filteredRepos].sort((a, b) => {
+    if (sortBy === "stars") return b.stargazerCount - a.stargazerCount;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+
   return {
     username,
     setUsername,
     loading,
     error,
-    repositories: repos,
+    repositories: sortedRepos as Repository[],
     after,
     before,
-    pageInfo,
+    pageInfo: pageInfo as PageInfo | undefined,
     handleNext,
     handlePrevious,
+    languageFilter,
+    setLanguageFilter,
+    sortBy,
+    setSortBy,
+    availableLanguages: [
+      ...new Set(
+        repositories
+          .map((repo: Repository) => repo.primaryLanguage?.name)
+          .filter(Boolean)
+      ),
+    ] as string[],
   };
 };
