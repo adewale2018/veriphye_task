@@ -1,35 +1,43 @@
 import type { PageInfo, Repository } from "../types";
+import { useEffect, useState } from "react";
 
 import { GET_USER_REPOS } from "../graphql/queries";
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
 
 export const useRepositories = () => {
   const [first] = useState(15);
   const [username, setUsername] = useState("");
+  const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [before, setBefore] = useState<string | null>(null);
   const [after, setAfter] = useState<string | null>(null);
   const [languageFilter, setLanguageFilter] = useState("");
   const [sortBy, setSortBy] = useState("updated");
 
+  const variables =
+  direction === "forward"
+    ? { username, first, after, orderBy: { field: "UPDATED_AT", direction: "DESC" } }
+    : { username, last: first, before, orderBy: { field: "UPDATED_AT", direction: "DESC" } };
+
   const { loading, error, data } = useQuery(GET_USER_REPOS, {
-    variables: { username, first, after, before, last: null },
+    variables,
     skip: !username,
     notifyOnNetworkStatusChange: true,
   });
   const pageInfo = data?.user.repositories.pageInfo;
 
   const handleNext = () => {
-    if (data?.user?.repositories.pageInfo.hasNextPage) {
-      setAfter(data.user.repositories.pageInfo.endCursor);
+    if (pageInfo?.hasNextPage) {
+      setAfter(pageInfo.endCursor);
       setBefore(null);
+      setDirection("forward");
     }
   };
-
+  
   const handlePrevious = () => {
-    if (data?.user?.repositories.pageInfo.hasPreviousPage) {
-      setBefore(data.user.repositories.pageInfo.startCursor);
+    if (pageInfo?.hasPreviousPage) {
+      setBefore(pageInfo.startCursor);
       setAfter(null);
+      setDirection("backward");
     }
   };
 
@@ -47,6 +55,12 @@ export const useRepositories = () => {
     if (sortBy === "stars") return b.stargazerCount - a.stargazerCount;
     return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
   });
+
+  useEffect(() => {
+    setAfter(null);
+    setBefore(null);
+    setDirection("forward");
+  }, [username]);
 
   return {
     username,
