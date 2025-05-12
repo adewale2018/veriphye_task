@@ -14,9 +14,9 @@ export default function Filters({
     setLanguageFilter("");
   }
   return (
-    <div className="flex flex-col sm:flex-row justify-start items-center my-6 gap-4">
+    <div className="flex flex-wrap md:justify-start justify-end items-center my-6 md:gap-4">
       <div className="flex items-center gap-4">
-        <label htmlFor="language-filter" className="font-medium text-pri">
+        <label htmlFor="language-filter" className="font-medium text-pri leading-tight">
           Filter by language:
         </label>
         <select
@@ -34,7 +34,7 @@ export default function Filters({
         </select>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 mt-2 md:mt-0">
         <label htmlFor="sort-by" className="font-medium text-pri">
           Sort by:
         </label>
@@ -48,7 +48,7 @@ export default function Filters({
           <option value="stars">Stars</option>
         </select>
       </div>
-      <Button className="text-red-600 hover:bg-red-500 hover:text-white cursor-pointer" variant="outline" onClick={handleClearFilters}>Clear Filter</Button>
+      <Button className="mt-2 md:mt-0 text-red-600 hover:bg-red-500 hover:text-white cursor-pointer" variant="outline" onClick={handleClearFilters}>Clear Filter</Button>
     </div>
   );
 }
