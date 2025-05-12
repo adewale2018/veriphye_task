@@ -1,3 +1,4 @@
+import { Button } from "./ui/button";
 import type { FiltersProps } from "../types";
 
 export default function Filters({
@@ -7,8 +8,13 @@ export default function Filters({
   setSortBy,
   availableLanguages,
 }: FiltersProps) {
+
+  const handleClearFilters = () => {
+    setSortBy("");
+    setLanguageFilter("");
+  }
   return (
-    <div className="flex flex-col sm:flex-row justify-between items-center my-6 gap-4">
+    <div className="flex flex-col sm:flex-row justify-start items-center my-6 gap-4">
       <div className="flex items-center gap-4">
         <label htmlFor="language-filter" className="font-medium text-pri">
           Filter by language:
@@ -42,6 +48,7 @@ export default function Filters({
           <option value="stars">Stars</option>
         </select>
       </div>
+      <Button className="text-red-600 hover:bg-red-500 hover:text-white cursor-pointer" variant="outline" onClick={handleClearFilters}>Clear Filter</Button>
     </div>
   );
 }
